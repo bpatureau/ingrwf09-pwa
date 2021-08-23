@@ -1,4 +1,4 @@
-const version = "0.1"
+const version = "0.2"
 
 self.addEventListener("install", () => {
   console.log("install Service worker version " + version)
