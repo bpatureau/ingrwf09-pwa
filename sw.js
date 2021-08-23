@@ -21,9 +21,9 @@ if(workbox) {
     { 
       "url" : "index.html"
     },
-    /*{
-      "url" : "style.css"
-    }*/
+    {
+      "url" : "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+    }
   ])
 
   workbox.routing.registerRoute(
@@ -32,7 +32,20 @@ if(workbox) {
       cacheName: "design-cache",
       plugins: [
         new workbox.expiration.Plugin({
-          maxAgeSeconds: 30*24*60*60 //30 jours
+          maxAgeSeconds: 30*24*60*60, //30 jours
+          maxEntries: 50
+        })
+      ]
+    })
+  )
+
+  workbox.routing.registerRoute(
+    "https://api.punkapi.com/v2/beers",
+    new workbox.strategies.NetworkFirst({
+      cacheName: "api-cache",
+      plugins: [
+        new workbox.expiration.Plugin({
+          maxAgeSeconds: 60*60, // 1 heure
         })
       ]
     })
